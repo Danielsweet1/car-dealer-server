@@ -1,0 +1,14 @@
+[
+  {
+    "brand": "toyota",
+    "image": "https://www.shutterstock.com/image-illustration/tula-russia-june-22-2021-260nw-2007675620.jpg"
+  },
+  {
+    "brand": "BMW",
+    "image": "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8Ym13JTIwY2FyfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
+  },
+  {
+    "brand": "tesla",
+    "image": "https://media.istockphoto.com/id/1278562091/photo/tesla-model-s-driving-across-a-bridge.jpg?s=612x612&w=0&k=20&c=_AL7uasy6-gzM5VOls0s7O4AZf2z2MiBuJou0oHQQFA="
+  }
+]

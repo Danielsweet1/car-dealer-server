@@ -1,0 +1,92 @@
+[
+    {
+      "rating": { "number": 4.5, "badge": "Excellent" },
+      "total_sell": 480,
+      "location": "Gulshan-1",
+      "original_price": 50000,
+      "years_of_use": "2 year",
+      "resale_price": 35000,
+      "verified": true,
+      "seller_name": "SweetPalma",
+      "model": "Toyota Avalon",
+      "brand": "toyota",
+  
+      "image_url": "https://www.carmodelslist.com/wp-content/uploads/2012/04/toyota-car-models.jpg",
+      "details": "The HyperText Markup Language or HTML is the standard markup language for documents designed to be displayed in a web browser. It can be assisted by technologies such as Cascading Style Sheets and scripting languages such as JavaScript."
+    },
+    {
+      "rating": { "number": 4.5, "badge": "Excellent" },
+      "total_sell": 450,
+      "location": "Gulshan-2",
+      "original_price": 40000,
+      "years_of_use": "1.5 years",
+      "resale_price": 30000,
+      "verified": true,
+      "seller_name": "sweet palma",
+      "model": "Toyota Camry",
+      "brand": "toyota",
+  
+      "image_url": "https://img.freepik.com/free-photo/online-web-design_53876-95309.jpg?size=626&ext=jpg&ga=GA1.2.800180060.1661101819&semt=sph",
+      "details": "The HyperText Markup Language or HTML is the standard markup language for documents designed to be displayed in a web browser. It can be assisted by technologies such as Cascading Style Sheets and scripting languages such as JavaScript."
+    },
+    {
+      "rating": { "number": 4.5, "badge": "Excellent" },
+      "total_sell": 488,
+      "location": "Banani",
+      "original_price": 35000,
+      "years_of_use": "3 years",
+      "resale_price": 20000,
+      "verified": true,
+      "seller_name": "Sweet Palma",
+      "model": "BMW X2",
+      "brand": "BMW",
+  
+      "image_url": "https://img.freepik.com/free-photo/online-web-design_53876-95309.jpg?size=626&ext=jpg&ga=GA1.2.800180060.1661101819&semt=sph",
+      "details": "The HyperText Markup Language or HTML is the standard markup language for documents designed to be displayed in a web browser. It can be assisted by technologies such as Cascading Style Sheets and scripting languages such as JavaScript."
+    },
+    {
+      "rating": { "number": 4.5, "badge": "Excellent" },
+      "total_sell": 488,
+      "location": "Banani",
+      "original_price": 50000,
+      "years_of_use": "6 months",
+      "resale_price": 47000,
+      "verified": true,
+      "seller_name": "Ankon Costa",
+      "model": "BMW i3",
+      "brand": "BMW",
+  
+      "image_url": "https://img.freepik.com/free-photo/online-web-design_53876-95309.jpg?size=626&ext=jpg&ga=GA1.2.800180060.1661101819&semt=sph",
+      "details": "The HyperText Markup Language or HTML is the standard markup language for documents designed to be displayed in a web browser. It can be assisted by technologies such as Cascading Style Sheets and scripting languages such as JavaScript."
+    },
+    {
+      "rating": { "number": 4.5, "badge": "Excellent" },
+      "total_sell": 488,
+      "location": "Gulshan-2",
+      "original_price": 40000,
+      "years_of_use": "6 months",
+      "resale_price": 34000,
+      "verified": true,
+      "seller_name": "Sweet Palma",
+      "model": "Tesla Model S",
+      "brand": "tesla",
+  
+      "image_url": "https://img.freepik.com/free-photo/online-web-design_53876-95309.jpg?size=626&ext=jpg&ga=GA1.2.800180060.1661101819&semt=sph",
+      "details": "The HyperText Markup Language or HTML is the standard markup language for documents designed to be displayed in a web browser. It can be assisted by technologies such as Cascading Style Sheets and scripting languages such as JavaScript."
+    },
+    {
+      "rating": { "number": 4.5, "badge": "Excellent" },
+      "total_sell": 488,
+      "location": "Gulshan-2",
+      "original_price": 90000,
+      "years_of_use": "9 months",
+      "resale_price": 80000,
+      "verified": true,
+      "seller_name": "Ankon Costa",
+      "model": "Tesla Model X",
+      "brand": "tesla",
+  
+      "image_url": "https://img.freepik.com/free-photo/online-web-design_53876-95309.jpg?size=626&ext=jpg&ga=GA1.2.800180060.1661101819&semt=sph",
+      "details": "The HyperText Markup Language or HTML is the standard markup language for documents designed to be displayed in a web browser. It can be assisted by technologies such as Cascading Style Sheets and scripting languages such as JavaScript."
+    }
+  ]
