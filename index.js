@@ -50,6 +50,17 @@ const run = async () => {
       res.send(result);
     });
 
+    app.get('/allsellers', async(req,res)=>{
+      const filter = {role: 'Seller'}
+      const seller = await usersCollection.find(filter).toArray()
+      res.send(seller)
+    })
+    app.get('/allbuyers', async(req,res)=>{
+      const filter = {role: 'User'}
+      const seller = await usersCollection.find(filter).toArray()
+      res.send(seller)
+    })
+
     app.get("/jwt", async (req, res) => {
       const email = req.query.email;
       const query = { email: email };
@@ -60,6 +71,20 @@ const run = async () => {
       }
       res.status(403).send({message: 'unauthorized User'})
     });
+
+    app.put('/seller/:id',async(req,res)=>{
+        const id = req.params.id;
+        const filter = {_id: ObjectID(id)}
+        const options = {upsert: true}
+        const updatedDoc = {
+          $set: {
+            verified: true
+          }
+        }
+        const result = await CarsCollection.updateOne(filter, updatedDoc,options)
+        const result2 = await usersCollection.updateOne(filter, updatedDoc,options)
+        res.send({result,result2})
+    })
 
     app.get("/category", async (req, res) => {
       const query = {};
