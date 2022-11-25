@@ -61,6 +61,13 @@ const run = async () => {
       res.send(seller)
     })
 
+    app.post('/cars',async(req,res)=>{
+      const carInfo = req.body;
+      carInfo.date = new Date()
+      const result = await CarsCollection.insertOne(carInfo)
+      res.send(result)
+    })
+
     app.get("/jwt", async (req, res) => {
       const email = req.query.email;
       const query = { email: email };
@@ -81,9 +88,15 @@ const run = async () => {
             verified: true
           }
         }
-        const result = await CarsCollection.updateOne(filter, updatedDoc,options)
-        const result2 = await usersCollection.updateOne(filter, updatedDoc,options)
-        res.send({result,result2})
+        const result = await usersCollection.updateOne(filter, updatedDoc,options)
+        res.send(result)
+    })
+
+    app.delete('/users/:id',async(req,res)=>{
+      const id = req.params.id;
+      const query = {_id: ObjectID(id)}
+      const result = await usersCollection.deleteOne(query)
+      res.send(result)
     })
 
     app.get("/category", async (req, res) => {
