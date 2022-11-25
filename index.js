@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const { MongoClient, ServerApiVersion } = require("mongodb");
+const { ObjectID } = require("bson");
 const port = process.env.PORT || 5000;
 const app = express();
 
@@ -22,6 +23,15 @@ const run = async () => {
   try {
     const Categories = client.db("carDealer").collection("categories");
     const CarsCollection = client.db("carDealer").collection("cars");
+    const usersCollection = client.db("carDealer").collection("users");
+    const bookingsCollection = client.db("carDealer").collection("bookings");
+
+
+    app.post('/users',async(req, res)=>{
+        const user = req.body
+        const result = await usersCollection.insertOne(user)
+        res.send(result)
+    })
     app.get("/category", async (req, res) => {
       const query = {};
       const cars = await Categories.find(query).toArray();
@@ -34,6 +44,13 @@ const run = async () => {
         const results = await CarsCollection.find(filter).toArray()
         res.send(results)
     })
+
+    app.post('/booking',async(req,res)=>{
+      const booking = req.body
+      const result = await bookingsCollection.insertOne(booking)
+      res.send(result)
+    })
+
   } finally {
   }
 };
