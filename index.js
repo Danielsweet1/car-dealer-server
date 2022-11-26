@@ -50,6 +50,19 @@ const run = async () => {
       res.send(result);
     });
 
+    app.get('/user/admin/:email',async(req,res)=>{
+      const email = req.params.email;
+      const filter = {email: email}
+      const user = await usersCollection.findOne(filter)
+      res.send({isAdmin: user?.role === 'admin'})
+    })
+    app.get('/user/seller/:email',async(req,res)=>{
+      const email = req.params.email;
+      const filter = {email: email}
+      const user = await usersCollection.findOne(filter)
+      res.send({isSeller: user?.role === 'Seller'})
+    })
+
     app.get('/allsellers', async(req,res)=>{
       const filter = {role: 'Seller'}
       const seller = await usersCollection.find(filter).toArray()
@@ -59,6 +72,20 @@ const run = async () => {
       const filter = {role: 'User'}
       const seller = await usersCollection.find(filter).toArray()
       res.send(seller)
+    })
+
+    app.get('/myproducts',async(req,res)=>{
+      const email = req.query.email;
+      const filter = {email: email};
+      const products = await CarsCollection.find(filter).toArray()
+      res.send(products)
+    })
+
+    app.delete('/myproducts/:id',async(req,res)=>{
+      const id = req.params.id;
+      const filter = {_id : ObjectID(id)}
+      const result = await CarsCollection.deleteOne(filter)
+      res.send(result)
     })
 
     app.post('/cars',async(req,res)=>{
