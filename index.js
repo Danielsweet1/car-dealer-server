@@ -46,6 +46,7 @@ const run = async () => {
     const bookingsCollection = client.db("carDealer").collection("bookings");
     const paymentCollection = client.db("carDealer").collection("payments");
     const reportCollection = client.db("carDealer").collection("reports");
+    const adCollection = client.db("carDealer").collection("ads");
 
     app.post("/users", async (req, res) => {
       const user = req.body;
@@ -155,12 +156,17 @@ const run = async () => {
       res.send(products);
     });
 
-    app.get("/myproducts/:id", async (req, res) => {
-      const id = req.params.id;
-      const query = { _id: ObjectID(id) };
-      const product = await CarsCollection.findOne(query);
-      res.send(product);
-    });
+   app.post('/advertise',async(req,res)=>{
+    const product = req.body;
+    const result = await adCollection.insertOne(product)
+    res.send(result)
+   })
+
+   app.get('/advertise',async(req,res)=>{
+    const query = {}
+    const ads = await adCollection.find(query).toArray()
+    res.send(ads)
+   })
 
     app.delete("/myproducts/:id", async (req, res) => {
       const id = req.params.id;
