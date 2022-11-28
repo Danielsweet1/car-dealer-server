@@ -6,7 +6,6 @@ const { MongoClient, ServerApiVersion } = require("mongodb");
 const { ObjectID } = require("bson");
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
-
 const port = process.env.PORT || 5000;
 const app = express();
 
@@ -46,6 +45,7 @@ const run = async () => {
     const usersCollection = client.db("carDealer").collection("users");
     const bookingsCollection = client.db("carDealer").collection("bookings");
     const paymentCollection = client.db("carDealer").collection("payments");
+    const reportCollection = client.db("carDealer").collection("reports");
 
     app.post("/users", async (req, res) => {
       const user = req.body;
@@ -88,43 +88,78 @@ const run = async () => {
       res.send(seller);
     });
 
-    app.post('/payment',async(req,res)=>{
+    app.post("/payment", async (req, res) => {
       const payment = req.body;
       const id = payment.bookingId;
-      const filter = {_id: ObjectID(id)}
+      const id2 = payment.productId;
+      const filter = { _id: ObjectID(id) };
+      const query = { _id: ObjectID(id2) };
       const updatedDoc = {
         $set: {
           paid: true,
-          transactionId: payment.transactionId
-        }
-      }
-      const result = await paymentCollection.insertOne(payment)
-      await bookingsCollection.updateOne(filter, updatedDoc)
+          transactionId: payment.transactionId,
+        },
+      };
+      const updatedDoc2 = {
+        $set: {
+          sold: true,
+          transactionId: payment.transactionId,
+        },
+      };
+      const result = await paymentCollection.insertOne(payment);
+      await bookingsCollection.updateOne(filter, updatedDoc);
+      await CarsCollection.updateOne(query, updatedDoc2);
+      res.send(result);
+    });
+
+    app.post("/reporteditems", async (req, res) => {
+      const report = req.body;
+      const result = await reportCollection.insertOne(report)
       res.send(result)
- })
+    });
+
+    app.get('/reporteditems',async(req,res)=>{
+      const query = {}
+      
+      const report = await reportCollection.find(query).toArray()
+      res.send(report)
+    })
+
+
+    app.delete('/reporteditems/:id',async(req,res)=>{
+      const id = req.params.id;
+      const query = {_id: ObjectID(id)}
+      const result = await reportCollection.deleteOne(query)
+      res.send(result)
+    })
 
     app.post("/create-payment-intent", async (req, res) => {
       const booking = req.body;
       const price = booking.price;
-      const amount = (price * 100)
-    
+      const amount = price * 100;
+
       const paymentIntent = await stripe.paymentIntents.create({
         amount: amount,
         currency: "usd",
-        payment_method_types: [
-          'card'
-        ]
+        payment_method_types: ["card"],
       });
       res.send({
         clientSecret: paymentIntent.client_secret,
       });
-    })
+    });
 
     app.get("/myproducts", async (req, res) => {
       const email = req.query.email;
       const filter = { email: email };
       const products = await CarsCollection.find(filter).toArray();
       res.send(products);
+    });
+
+    app.get("/myproducts/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectID(id) };
+      const product = await CarsCollection.findOne(query);
+      res.send(product);
     });
 
     app.delete("/myproducts/:id", async (req, res) => {
@@ -184,17 +219,17 @@ const run = async () => {
       res.send(cars);
     });
 
-    app.post('/category',async(req,res)=>{
+    app.post("/category", async (req, res) => {
       const category = req.body;
-      const query = {brand: category.brand}
-      const all = await Categories.findOne(query)
-      
-      if(category.brand === all?.brand){
-        return res.send({message: 'already added'})
+      const query = { brand: category.brand };
+      const all = await Categories.findOne(query);
+
+      if (category.brand === all?.brand) {
+        return res.send({ message: "already added" });
       }
-      const result = await Categories.insertOne(category)
-      res.send(result)
-    })
+      const result = await Categories.insertOne(category);
+      res.send(result);
+    });
 
     app.get("/category/:brand", async (req, res) => {
       const brand = req.params.brand;
@@ -209,12 +244,12 @@ const run = async () => {
       res.send(result);
     });
 
-    app.get('/bookings/:id',async(req,res)=>{
+    app.get("/bookings/:id", async (req, res) => {
       const id = req.params.id;
-      const query = {_id: ObjectID(id)}
-      const booking = await bookingsCollection.findOne(query)
-      res.send(booking)
-    })
+      const query = { _id: ObjectID(id) };
+      const booking = await bookingsCollection.findOne(query);
+      res.send(booking);
+    });
 
     app.get("/bookings", verifyJwt, async (req, res) => {
       const email = req.query.email;
@@ -227,12 +262,12 @@ const run = async () => {
       res.send(booking);
     });
 
-    app.delete('/bookings/:id',async(req,res)=>{
+    app.delete("/bookings/:id", async (req, res) => {
       const id = req.params.id;
-      const filter = {_id: ObjectID(id)}
-      const result = await bookingsCollection.deleteOne(filter)
-      res.send(result)
-    })
+      const filter = { _id: ObjectID(id) };
+      const result = await bookingsCollection.deleteOne(filter);
+      res.send(result);
+    });
   } finally {
   }
 };
